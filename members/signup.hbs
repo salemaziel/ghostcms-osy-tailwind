@@ -10,15 +10,18 @@
 
     {{else if @member}}
 
+    {{#get "tiers" include="monthly_price,yearly_price,benefits" limit="all" as |tiers|}}
         {{!-- Logged in, not paying: Check out --}}
         <div class="gh-checkout-form">
             <h1 class="gh-checkout-title">Choose your subscription</h1>
             <p>Unlock full access to {{@site.title}} and see the entire library of members-only content & updates</p>
+            {{#foreach tiers}}
             <div class="gh-checkout-box">
+                 {{#if monthly_price}}
                 <div class="gh-checkout-plan">
                     <header class="gh-checkout-plan-header">
                         <h3>Monthly</h3>
-                        <span>$</span><strong>{{@price.monthly}}</strong> / month
+                        <span>$</span><strong>{{price monthly_price currency=currency}}</strong> / month
                     </header>
                     <div class="gh-checkout-plan-content">
                         <ul>
@@ -27,13 +30,15 @@
                             <li>Support independent publishing</li>
                             <li>Simple, secure card payment</li>
                         </ul>
-                        <a class="button primary fit" href="javascript:void(0)" data-members-plan="Monthly">Choose this plan</a>
+                        <a class="button primary fit" href="javascript:" data-members-plan="Monthly" data-portal="signup/{{id}}/monthly">Choose this plan</a>
                     </div>
                 </div>
+                {{/if}}
+                {{#if yearly_price}}
                 <div class="gh-checkout-plan">
                     <header class="gh-checkout-plan-header">
                         <h3>Yearly</h3>
-                        <span>$</span><strong>{{@price.yearly}}</strong> / year
+                        <span>$</span><strong>{{price yearly_price currency=currency}}</strong> / year
                     </header>
                     <div class="gh-checkout-plan-content">
                         <ul>
@@ -43,12 +48,14 @@
                             <li>Simple, secure card payment</li>
                             <li>One easy payment instead of 12!</li>
                         </ul>
-                        <a class="button primary fit" href="javascript:void(0)" data-members-plan="Yearly">Choose this plan</a>
+                        <a class="button primary fit" href="javascript:" data-members-plan="Yearly" data-portal="signup/{{id}}/monthly">Choose this plan</a>
                     </div>
                 </div>
+                {{/if}}
             </div>
+            {{/foreach}}
         </div>
-
+    {{/get}}
     {{else}}
 
         {{!-- Not logged in: Sign up --}}

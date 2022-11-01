@@ -4,8 +4,7 @@
     "demo": "https://ghost-tailwind.rblartdesign.com",
     "version": "1.1.0",
     "engines": {
-        "ghost": ">=3.0.0",
-        "ghost-api": "v3"
+        "ghost": ">=5.0.0"
     },
     "license": "MIT",
     "screenshots": {
@@ -82,7 +81,8 @@
             "xl": {
                 "width": 2000
             }
-        }
+        },
+        "card_assets": true
     },
     "dependencies": {
         "@tailwindcss/typography": "^0.2.0",
